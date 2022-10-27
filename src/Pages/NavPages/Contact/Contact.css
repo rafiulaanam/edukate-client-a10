@@ -1,0 +1,6 @@
+.display-4{
+    font-family: 'Jost', sans-serif;
+}
+.section-title h6{
+    border-bottom: 2px dashed rgb(235, 58, 58);
+}
