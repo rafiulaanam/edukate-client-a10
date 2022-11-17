@@ -1,102 +1,110 @@
 import React, { useContext } from "react";
-import {Image } from "react-bootstrap";
-import { FaBookReader } from "react-icons/fa";
-import { HiLogout } from "react-icons/hi";
 import { Link } from "react-router-dom";
+import logo from "../../../Assets/img/logo.png";
+import propic from "../../../Assets/img/user.png";
 import { AuthContext } from "../../../Context/AuthProvider";
+
+
 const Navbar = () => {
-  const { user,providerLogout } = useContext(AuthContext);
+  const {user,logout} = useContext(AuthContext)
 
+const handleLogout =()=>{
+  logout()
+  .then(()=>{})
+  .catch(e=>console.log(e))
+}
 
+  const menuItem = (
+    <>
+      <li>
+        <Link to={"/"}>Home</Link>
+      </li>
+      <li>
+        <Link to={"/courses"}>Courses</Link>
+      </li>
 
-  const handelLogout= ()=>{
-    providerLogout()
-    .then((result)=>{
-        const user = result.user;
-        console.log(user)
-    })
-    .catch(error=>console.error(error))
-    
+      <li>
+        <a href="#!">FAQ</a>
+      </li>
+      <li>
+        <a href="#!">Blog</a>
+      </li>
+      <li>
+        <div className="form-control">
+          <label className="label cursor-pointer">
+            <span className="label-text text-base">Remember me</span>
+            <input type="checkbox" className="toggle toggle-sm ml-2" checked />
+          </label>
+        </div>
+      </li>
+    </>
+  );
 
-  }
+  const profileItem = (
+    <>
+
+    {
+      user?.uid ? 
+      <>
+        <button className="btn" onClick={handleLogout}>Sign out</button>
+      <div className="avatar">
+        <div className="w-10 ml-5 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+          <img alt="" src={user?.photoURL=== null ? propic : user?.photoURL} />
+        </div>
+      </div>
+      </>
+      :
+      <div className="btn-group">
+        <Link to={'/register'} className="btn">
+          Register
+        </Link>
+        <Link to={'/login'} className="btn">
+          Login
+        </Link>
+      </div>
+      
+     
+    }
+      
+    </>
+  );
 
   return (
-    <div>
-      <div class="container-fluid p-0">
-        <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0 px-lg-5">
-          <Link to={"/"} class="navbar-brand ml-lg-3">
-            <h1 class="m-0 text-uppercase text-primary flex">
-              <FaBookReader></FaBookReader>Edukate
-            </h1>
-          </Link>
-          <button
-            type="button"
-            class="navbar-toggler"
-            data-toggle="collapse"
-            data-target="#navbarCollapse"
+    <div className="navbar bg-base-200">
+      <div className="navbar-start">
+        <div className="dropdown">
+          <label tabIndex={0} className="btn btn-ghost lg:hidden">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h8m-8 6h16"
+              />
+            </svg>
+          </label>
+          <ul
+            tabIndex={0}
+            className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
           >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div
-            class="collapse navbar-collapse justify-content-between px-lg-3"
-            id="navbarCollapse"
-          >
-            <div class="navbar-nav mx-auto py-0">
-              <Link to={"/"} class="nav-item nav-link active">
-                Home
-              </Link>
-            
-              <Link to={"/courses"} class="nav-item nav-link">
-                Courses
-              </Link>
-            
-              <Link to={"/faq"} class="nav-item nav-link">
-                FAQ
-              </Link>
-              <Link to={"/blog"} class="nav-item nav-link">
-                Blog
-              </Link>
-              <Link to={"/contact"} class="nav-item nav-link">
-                Contact
-              </Link>
-            </div>
-            {user ? (
-              <>
-                {user?.displayName}
+            {menuItem}
+          </ul>
+        </div>
 
-                <Image
-                  className="rounded-circle px-4"
-                  style={{ height: "40px" }}
-                  src={user?.photoURL}
-                ></Image>
-
-<button onClick={handelLogout} className="btn btn-warning">Logout <HiLogout></HiLogout></button>
-              </>
-            ) : (
-              <>
-                <Link
-                  to="/register"
-                  class="btn btn-primary py-2 px-4 d-none d-lg-block"
-                >Join Us
-                </Link>
-
-                <Link
-                  to={"/login"}
-                  class="btn btn-secondary py-2 px-4 d-none d-lg-block ms-4"
-                >
-                  Login
-                </Link>
-              </>
-            )}
-
-<div className="avatar ml-2">
-  <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-    <img alt="" src="https://placeimg.com/192/192/people" />
-  </div>
-</div>
-          </div>
-        </nav>
+        <Link to={'/'}  className="btn btn-ghost normal-case text-xl">
+          <img className="w-10 mr-2" src={logo} alt="" /> Edukate
+        </Link>
       </div>
+      <div className="navbar-center hidden lg:flex">
+        <ul className="menu menu-horizontal p-0">{menuItem}</ul>
+      </div>
+      <div className="navbar-end">{profileItem}</div>
     </div>
   );
 };
