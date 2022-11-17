@@ -25,7 +25,7 @@ const Navbar = () => {
       <div class="container-fluid p-0">
         <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0 px-lg-5">
           <Link to={"/"} class="navbar-brand ml-lg-3">
-            <h1 class="m-0 text-uppercase text-primary">
+            <h1 class="m-0 text-uppercase text-primary flex">
               <FaBookReader></FaBookReader>Edukate
             </h1>
           </Link>
@@ -45,12 +45,11 @@ const Navbar = () => {
               <Link to={"/"} class="nav-item nav-link active">
                 Home
               </Link>
-              <Link to={"/about"} class="nav-item nav-link">
-                About
-              </Link>
+            
               <Link to={"/courses"} class="nav-item nav-link">
                 Courses
               </Link>
+            
               <Link to={"/faq"} class="nav-item nav-link">
                 FAQ
               </Link>
@@ -78,8 +77,7 @@ const Navbar = () => {
                 <Link
                   to="/register"
                   class="btn btn-primary py-2 px-4 d-none d-lg-block"
-                >
-                  Join Us
+                >Join Us
                 </Link>
 
                 <Link
@@ -90,6 +88,12 @@ const Navbar = () => {
                 </Link>
               </>
             )}
+
+<div className="avatar ml-2">
+  <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+    <img alt="" src="https://placeimg.com/192/192/people" />
+  </div>
+</div>
           </div>
         </nav>
       </div>
