@@ -15,6 +15,8 @@ const AuthProvider = ({ children }) => {
 
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [theme, setTheme] = useState("light")
+
 
   useEffect(()=>{
     const unsubscribe = onAuthStateChanged(auth, (currentUser)=>{
@@ -49,6 +51,8 @@ const AuthProvider = ({ children }) => {
   const authInfo = {
     user,
     loading,
+    theme,
+    setTheme,
     googleProvider,
     githubProvider,
     emailRegister,

@@ -3,6 +3,7 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import toast from 'react-hot-toast';
 
 import { AuthContext } from "../../Context/AuthProvider";
 
@@ -22,7 +23,7 @@ const navigate = useNavigate()
         console.log(user);
         handleUpdateProfile(data.fullName, data.photoURL);
         form.reset()
-        navigate('/')
+       
       })
       .catch((e) => console.log(e));
    
@@ -37,7 +38,10 @@ const navigate = useNavigate()
     };
 
     updateUser(userInfo)
-      .then(() => {})
+      .then(() => {
+        navigate('/')
+        toast.success("User Created Successfully")
+      })
       .catch((e) => console.log(e));
   };
 
@@ -45,14 +49,18 @@ const navigate = useNavigate()
     googleProvider()
     .then((result) => {
         const user = result.user
-        console.log(user)})
+        console.log(user)
+      navigate('/')
+      })
       .catch((e) => console.log(e));
   }
   const handleGithub=()=>{
     githubProvider()
     .then((result) => {
         const user = result.user
-        console.log(user)})
+        console.log(user)
+        navigate('/')
+      })
     .catch((e) => console.log(e));
   }
 

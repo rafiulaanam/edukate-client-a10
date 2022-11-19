@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider";
+import toast from 'react-hot-toast';
 
 const Login = () => {
   const { emailSignIn, googleProvider, githubProvider } =
@@ -21,6 +22,7 @@ const Login = () => {
         console.log(user);
         form.reset();
         navigate(from, { replace: true });
+        toast.success("User Login Successfully")
       })
       .catch((e) => console.log(e));
   };
@@ -30,6 +32,7 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
+        navigate(from, { replace: true });
       })
       .catch((e) => console.log(e));
   };
@@ -38,6 +41,7 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
+        navigate(from, { replace: true });
       })
       .catch((e) => console.log(e));
   };

@@ -63,21 +63,21 @@ const Courses = () => {
                   <th>1</th>
                   <td>Cy Ganderton</td>
                   <td>C Programming for Beginners</td>
-                  <td>Blue</td>
+                  <td>13 Nov 2022</td>
                 </tr>
 
                 <tr className="active">
                   <th>2</th>
                   <td>Hart Hagerty</td>
                   <td>Introduction to R</td>
-                  <td>Purple</td>
+                  <td>14 Nov 2022</td>
                 </tr>
 
                 <tr>
                   <th>3</th>
                   <td>Brice Swyre</td>
                   <td>Graphic Design Fundamentals</td>
-                  <td>Red</td>
+                  <td>15 Nov 2022</td>
                 </tr>
               </tbody>
             </table>
@@ -90,7 +90,7 @@ const Courses = () => {
           ))}
         </div>
       <div className="flex justify-center">
-      <Link to={'/checkout'}><button className="btn btn-accent my-10  ">Get Premium Access</button></Link>
+      <Link to={'/courses/get-premium-access'}><button className="btn btn-accent my-10  ">Get Premium Access</button></Link>
       </div>
       </div>
     </div>

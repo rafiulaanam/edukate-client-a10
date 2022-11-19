@@ -1,16 +1,30 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../../Assets/img/logo.png";
 import propic from "../../../Assets/img/user.png";
 import { AuthContext } from "../../../Context/AuthProvider";
 
 
 const Navbar = () => {
-  const {user,logout} = useContext(AuthContext)
+  const {user,logout,setTheme} = useContext(AuthContext)
+const navigate =useNavigate()
+
+const handleMode=(event)=>{
+  const check = event.target.checked 
+  if(check){
+
+   return setTheme(true)
+  }
+  return setTheme(false)
+}
 
 const handleLogout =()=>{
+
+
   logout()
-  .then(()=>{})
+  .then(()=>{
+    navigate('/')
+  })
   .catch(e=>console.log(e))
 }
 
@@ -24,19 +38,12 @@ const handleLogout =()=>{
       </li>
 
       <li>
-        <a href="#!">FAQ</a>
+      <Link to={'/faq'}>FAQ</Link>
       </li>
       <li>
-        <a href="#!">Blog</a>
+        <Link to={'/blog'}>Blog</Link>
       </li>
-      <li>
-        <div className="form-control">
-          <label className="label cursor-pointer">
-            <span className="label-text text-base">Remember me</span>
-            <input type="checkbox" className="toggle toggle-sm ml-2" checked />
-          </label>
-        </div>
-      </li>
+      
     </>
   );
 
@@ -46,10 +53,18 @@ const handleLogout =()=>{
     {
       user?.uid ? 
       <>
+      <form onChange={handleMode} className="form-control mr-8">
+          <label className="label cursor-pointer">
+            <span className="label-text text-base">Remember me</span>
+            <input type="checkbox" className="toggle toggle-sm ml-2" name="mode" />
+          </label>
+        </form>
+
         <button className="btn" onClick={handleLogout}>Sign out</button>
-      <div className="avatar">
-        <div className="w-10 ml-5 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-          <img alt="" src={user?.photoURL=== null ? propic : user?.photoURL} />
+      <div data-tip={user.displayName} className="avatar tooltip  tooltip-left  ">
+        <div  className="   w-10 ml-5 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+
+          <img alt=""  src={user?.photoURL=== null ? propic : user?.photoURL} />
         </div>
       </div>
       </>
