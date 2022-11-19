@@ -45,14 +45,14 @@ export const router = createBrowserRouter([
         ),
         loader: ({ params }) =>
           fetch(
-            `https://educate-server-a-10-rafiulaanam.vercel.app/${params.id}`
+            `https://educate-server-a-10-rafiulaanam.vercel.app/courses/${params.id}`
           ),
       },
       {
         path: "/courses",
         element: <Courses></Courses>,
         loader: () =>
-          fetch("https://educate-server-a-10-rafiulaanam.vercel.app"),
+          fetch("https://educate-server-a-10-rafiulaanam.vercel.app/courses"),
       },
     ],
   },
