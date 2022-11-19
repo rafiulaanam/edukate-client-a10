@@ -10,8 +10,6 @@ import Login from "../Pages/Login/Login";
 import Register from "../Pages/Login/Register";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
-
-
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -37,24 +35,29 @@ export const router = createBrowserRouter([
         path: "/faq",
         element: <FAQ></FAQ>,
       },
-    
+
       {
         path: "/courses/:id",
-        element: <PrivateRoute><Checkout></Checkout></PrivateRoute>,
-        loader:({params})=>fetch(`http://localhost:5000/courses/${params.id}`)
+        element: (
+          <PrivateRoute>
+            <Checkout></Checkout>
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(
+            `https://educate-server-a-10-rafiulaanam.vercel.app/${params.id}`
+          ),
       },
       {
         path: "/courses",
         element: <Courses></Courses>,
-        loader:()=>fetch("http://localhost:5000/courses")
+        loader: () =>
+          fetch("https://educate-server-a-10-rafiulaanam.vercel.app"),
       },
-
-      
     ],
   },
   {
-    path:'*',
-    element:<Error></Error>
-
-  }
+    path: "*",
+    element: <Error></Error>,
+  },
 ]);
